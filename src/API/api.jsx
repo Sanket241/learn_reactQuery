@@ -25,12 +25,24 @@ export const fetchIndividual = async (id) => {
   }
 };
 
-export const deletePost = async (id) => {
+export const deletePost =  (id) => {
   try {
-    const response = await api.delete(`/posts/${id}`);
-    return response.status === 200;
+    const response = api.delete(`/posts/${id}`);
+    return response.status === 200 ? id : null;
   } catch (error) {
     console.error("Error deleting post:", error.message);
     throw new Error("Failed to delete post.");
   }
 };
+
+export const updatePost = async (id) => {
+  
+  try {
+    const response = await api.put(`/posts/${id}`, { title: "Updated Title", body});
+    return response.data; 
+  } catch (error) {
+    console.error("Error updating post:", error.message);
+    throw new Error("Failed to update post.");
+  }
+};
+
